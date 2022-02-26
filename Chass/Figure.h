@@ -3,10 +3,11 @@
 
 class Figure
 {
-private:
+protected:
 	std::string name;
-	int x;
-	int y;
+	std::string color;
 public:
+	std::string getName();
+	std::string getColor();
 };
 

@@ -1,5 +1,9 @@
 #include "Figure.h"
-Figure::Figure() 
+std::string Figure::getName() {
+	return this->name;
+
+}
+std::string Figure::getColor()
 {
-	
+	return this->color;
 }

@@ -3,6 +3,9 @@
 class Pawn : public Figure
 {
 private:
-public: Pawn(std::string piece, int );
+	
+public:
+	Pawn();
+	Pawn(std::string w, std::string p);
 };
 
