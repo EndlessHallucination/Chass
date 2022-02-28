@@ -28,10 +28,10 @@ Game::Game()
 	{		
 		this->board[6][i] = Pawn("w", "p");
 		this->board[1][i] = Pawn("b", "p");
-		this->board[2][i] = EmptyField("e", "f");
-		this->board[3][i] = EmptyField("e", "f");
-		this->board[4][i] = EmptyField("e", "f");
-		this->board[5][i] = EmptyField("e", "f");
+		this->board[2][i] = EmptyField("O", "O");
+		this->board[3][i] = EmptyField("O", "O");
+		this->board[4][i] = EmptyField("O", "O");
+		this->board[5][i] = EmptyField("O", "O");
 	
 
 	}
@@ -43,68 +43,63 @@ Game::Game()
 		}
 		std::cout << std::endl;
 	}
-	getMove();
-}
-
-void Game::getMove()
-{
-	choosePiece();
-	chooseColor();
-	chooseCoord();
-}
-
-void Game::chooseColor()
-{
-	std::cout << "Enter the color: w - white, b - black " << std::endl;
-	char c;
-	std::cin >> c;
-	if (c != 'w' && c != 'b')
+	chooseChessCoord();
+	for (size_t j = 0; j < board[1].size(); j++)
 	{
-		std::cout << "Wrong input "<< std::endl;
-		chooseColor();
+		for (size_t i = 0; i < board[1].size(); i++)
+		{
+			std::cout << this->board[j][i].getName() << this->board[j][i].getColor() << ' ';
+		}
+		std::cout << std::endl;
 	}
 }
 
-void Game::chooseCoord()
+
+
+void Game::chooseChessCoord()
 {
-	std::cout << "Enter the X coordinate " << std::endl;
 	int x;
+	int y;
+	int xx;
+	int yy;
+	std::cout << "Enter the X coordinate " << std::endl;
 	std::cin >> x;
 	if (x <= 0 || x > 9)
 	{
 		std::cout << "Wrong input " << std::endl;;
-		chooseCoord();
+		chooseChessCoord();
 	}
 	std::cout << "Enter the Y coordinate " << std::endl;
-	int y;
 	std::cin >> y;
 	if (y <= 0 || y > 9)
 	{
 		std::cout << "Wrong input " << std::endl;;
-		chooseCoord();
+		chooseChessCoord();
 	}
+
+	std::cout << "Enter new X coordinate " << std::endl;
+	std::cin >> xx;
+	if (xx <= 0 || xx > 9)
+	{
+		std::cout << "Wrong input " << std::endl;;
+		chooseChessCoord();
+	}
+	std::cout << "Enter new Y coordinate " << std::endl;
+	std::cin >> yy;
+	if (yy <= 0 || yy > 9)
+	{
+		std::cout << "Wrong input " << std::endl;;
+		chooseChessCoord();
+	}
+	this->board[x][y] = this->board[xx][yy];
+	
 }
 
-void Game::choosePiece()
-{
 
-	std::cout << std::endl << "Enter the chess piece: \n p - pawn \n k - knight \n b - bishop \n r - rook \n q - queen \n K - king\n" << std::endl;
-	char chessPiece;
-	std::cin >> chessPiece;
-	switch (chessPiece) {
-	case 'p': break;
-	case 'k': break;
-	case 'b': break;
-	case 'r': break;
-	case 'q': break;
-	case 'K': break;
-	default: {
-		std::cout << "Wrong input" << std::endl;
-		std::cout << "--------------------------" << std::endl;
-		choosePiece();
-	}
-	}
-}
+
+
+
+
 
 
 

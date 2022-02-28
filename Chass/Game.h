@@ -14,10 +14,8 @@ private:
 	std::array<std::array<Figure, 8>, 8> board;
 public:
 	Game();
-	void getMove();
-	void choosePiece();
-	void chooseColor();
-	void chooseCoord();
+	void chooseChessCoord();
+
 
 };
 
