@@ -12,10 +12,11 @@ class Game
 {
 private:
 	std::array<std::array<Figure, 8>, 8> board;
+	bool turnOrder;
 public:
 	Game();
 	void chooseChessCoord();
-
-
+	void getBoard();
+	
 };
 

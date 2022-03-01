@@ -2,6 +2,8 @@
 
 Game::Game()
 {
+	this->turnOrder = true;
+
 	//negro
 
 	this->board[0][0] = Rook("b", "r");
@@ -32,18 +34,93 @@ Game::Game()
 		this->board[3][i] = EmptyField("O", "O");
 		this->board[4][i] = EmptyField("O", "O");
 		this->board[5][i] = EmptyField("O", "O");
+	}
+	getBoard();
+	chooseChessCoord();
+	getBoard();
+}
+
+
+
+void Game::chooseChessCoord()
+{
+	unsigned int x;
+	unsigned int y;
+	unsigned int xx;
+	int yy;
+	std::cout << "Enter the X coordinate " << std::endl;
+	std::cin >> x;
+	if (x < 0 || x > 8)
+	{
+		std::cout << "Wrong input " << std::endl;;
+		chooseChessCoord();
+	}
+	std::cout << "Enter the Y coordinate " << std::endl;
+	std::cin >> y;
+	if (y < 0 || y > 8)
+	{
+		std::cout << "Wrong input " << std::endl;;
+		chooseChessCoord();
+	}
 	
 
-	}
-	for (size_t j = 0; j < board[1].size(); j++)
+	std::cout << "Enter new X coordinate " << std::endl;
+	std::cin >> xx;
+	std::cout << "Enter new Y coordinate " << std::endl;
+	std::cin >> yy;
+
+	//pawnmove
+	if (this->board[x][y].getName() == "p" && this->board[x][y].getColor() == "b")
 	{
-		for (size_t i = 0; i < board[1].size(); i++)
-		{
-			std::cout << this->board[j][i].getName()<< this->board[j][i].getColor() << ' ';
+		if (x == 1) {
+			if (xx <= 3 && xx >= 2) {
+				this->board[xx][yy] = this->board[x][y];
+				this->board[x][y] = EmptyField("O", "O");
+			}
+			else if (xx > 3 || xx < 2) {
+				std::cout << "wrong" << std::endl;
+			}
 		}
-		std::cout << std::endl;
+		else if (x > 1 || x < 8) {
+			if (xx - x == 1 ) {
+				this->board[xx][yy] = this->board[x][y];
+				this->board[x][y] = EmptyField("O", "O");
+			}
+		}
+		else {
+			std::cout << "wrong" << std::endl;
+		}
+
 	}
-	chooseChessCoord();
+	//blackpawnmove
+	if (this->board[x][y].getName() == "p" && this->board[x][y].getColor() == "w")
+	{
+		if (x == 6) {
+			if (xx <= 5 && xx >= 4) {
+				this->board[xx][yy] = this->board[x][y];
+				this->board[x][y] = EmptyField("O", "O");
+			}
+			else if (xx > 4 || xx < 5) {
+				std::cout << "wrong" << std::endl;
+			}
+		}
+		else if (x >= 0 || x <=7) {
+			if (xx - x == -1) {
+				this->board[xx][yy] = this->board[x][y];
+				this->board[x][y] = EmptyField("O", "O");
+			}
+		}
+		else {
+			std::cout << "wrong" << std::endl;
+		}
+	}
+
+	
+	this->turnOrder = !this->turnOrder;
+}
+
+void Game::getBoard()
+{
 	for (size_t j = 0; j < board[1].size(); j++)
 	{
 		for (size_t i = 0; i < board[1].size(); i++)
@@ -56,44 +133,6 @@ Game::Game()
 
 
 
-void Game::chooseChessCoord()
-{
-	int x;
-	int y;
-	int xx;
-	int yy;
-	std::cout << "Enter the X coordinate " << std::endl;
-	std::cin >> x;
-	if (x <= 0 || x > 9)
-	{
-		std::cout << "Wrong input " << std::endl;;
-		chooseChessCoord();
-	}
-	std::cout << "Enter the Y coordinate " << std::endl;
-	std::cin >> y;
-	if (y <= 0 || y > 9)
-	{
-		std::cout << "Wrong input " << std::endl;;
-		chooseChessCoord();
-	}
-
-	std::cout << "Enter new X coordinate " << std::endl;
-	std::cin >> xx;
-	if (xx <= 0 || xx > 9)
-	{
-		std::cout << "Wrong input " << std::endl;;
-		chooseChessCoord();
-	}
-	std::cout << "Enter new Y coordinate " << std::endl;
-	std::cin >> yy;
-	if (yy <= 0 || yy > 9)
-	{
-		std::cout << "Wrong input " << std::endl;;
-		chooseChessCoord();
-	}
-	this->board[x][y] = this->board[xx][yy];
-	
-}
 
 
 
