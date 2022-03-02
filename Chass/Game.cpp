@@ -72,50 +72,76 @@ void Game::chooseChessCoord()
 	//pawnmove
 	if (this->board[x][y].getName() == "p" && this->board[x][y].getColor() == "b")
 	{
-		if (x == 1) {
-			if (xx <= 3 && xx >= 2) {
-				this->board[xx][yy] = this->board[x][y];
-				this->board[x][y] = EmptyField("O", "O");
-			}
-			else if (xx > 3 || xx < 2) {
-				std::cout << "wrong" << std::endl;
-			}
+		//case same color
+		if (this->board[xx][yy].getColor() == "b") {
+			std::cout << "wrong"<< std::endl;
 		}
-		else if (x > 1 || x < 8) {
-			if (xx - x == 1 ) {
-				this->board[xx][yy] = this->board[x][y];
-				this->board[x][y] = EmptyField("O", "O");
+		//movelogic
+		if (y == yy) {
+			if (x == 1) {
+				if (xx <= 3 && xx >= 2) {
+					if (yy == y + 1 || yy == y - 1) {
+						if (this->board[xx][yy].getColor() == "w") {
+							this->board[xx][yy] = this->board[x][y];
+						}
+						else {
+							std::cout << "wrong"<< std::endl;
+						}
+					}
+				}
+				else if (xx > 3 || xx < 2) {
+					std::cout << "wrong" << std::endl;
+				}
+			}
+			else if (x > 1 && x < 8) {
+				if (xx - x == 1) {
+					if (yy == y + 1 || yy == y - 1) {
+						if (this->board[xx][yy].getColor() == "w") {
+							this->board[xx][yy] = this->board[x][y];
+						}
+						else {
+							std::cout << "wrong" << std::endl;
+						}
+						this->board[xx][yy] = this->board[x][y];
+						this->board[x][y] = EmptyField("O", "O");
+					}
+				}
 			}
 		}
 		else {
 			std::cout << "wrong" << std::endl;
 		}
-
 	}
-	//blackpawnmove
+
+
+	//whitepawnmove
 	if (this->board[x][y].getName() == "p" && this->board[x][y].getColor() == "w")
 	{
-		if (x == 6) {
-			if (xx <= 5 && xx >= 4) {
-				this->board[xx][yy] = this->board[x][y];
-				this->board[x][y] = EmptyField("O", "O");
-			}
-			else if (xx > 4 || xx < 5) {
-				std::cout << "wrong" << std::endl;
-			}
+		if (this->board[xx][yy].getColor() == "w") {
+			std::cout << "wrong"<< std::endl;
 		}
-		else if (x >= 0 || x <=7) {
-			if (xx - x == -1) {
-				this->board[xx][yy] = this->board[x][y];
-				this->board[x][y] = EmptyField("O", "O");
+		if (y = yy) {
+			if (x == 6) {
+				if (xx <= 5 && xx >= 4) {
+					this->board[xx][yy] = this->board[x][y];
+					this->board[x][y] = EmptyField("O", "O");
+				}
+				else if (xx > 4 || xx < 5) {
+					std::cout << "wrong" << std::endl;
+				}
 			}
+			else if (x >= 0 || x <= 7) {
+				if (xx - x == -1) {
+					this->board[xx][yy] = this->board[x][y];
+					this->board[x][y] = EmptyField("O", "O");
+				}
+			}
+			
 		}
 		else {
 			std::cout << "wrong" << std::endl;
 		}
 	}
-
-	
 	this->turnOrder = !this->turnOrder;
 }
 
